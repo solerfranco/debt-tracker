@@ -44,13 +44,8 @@ class MainActivity : ComponentActivity() {
                 }
 
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    Column(
-                        modifier = Modifier.padding(24.dp),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        Text("Debt Tracker")
-                    }
+                    val store = remember { DebtStore(applicationContext) }
+                    DebtScreen(initial = remember { store.load() }, onChange = { store.save(it) })
                 }
 
                 update?.let { info ->
